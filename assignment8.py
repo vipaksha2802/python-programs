@@ -1,85 +1,24 @@
-# Employee Payroll Management System
+# Experiment 8: File Handling and I/O
 
-class Employee:
-    def __init__(self, employee_name, employee_id, basic_salary):
-        self.employee_name = employee_name
-        self.employee_id = employee_id
-        self.basic_salary = basic_salary
+# Open the input file in read mode
+with open("input.txt", "r") as file:
+    lines = file.readlines()
 
-    def calculate_grade(self):
-        if self.basic_salary >= 80000:
-            return "A"
-        elif self.basic_salary >= 60000:
-            return "B"
-        elif self.basic_salary >= 40000:
-            return "C"
-        else:
-            return "D"
+# Count total number of lines
+line_count = len(lines)
 
-    def display(self):
-        print("Employee Name :", self.employee_name)
-        print("Employee ID   :", self.employee_id)
-        print("Basic Salary  : ₹", self.basic_salary)
-        print("Grade         :", self.calculate_grade())
+# Extract the first two lines
+first_two_lines = lines[:2]
 
-    def __str__(self):
-        return (f"Employee(Name={self.employee_name}, "
-                f"ID={self.employee_id}, "
-                f"Salary=₹{self.basic_salary}, "
-                f"Grade={self.calculate_grade()})")
+# Write the first two lines into output.txt
+with open("output.txt", "w") as file:
+    file.writelines(first_two_lines)
 
+# Display results
+print("Total number of lines:", line_count)
+print("\nFirst two lines are:")
 
-class Company:
-    def __init__(self):
-        self.employees = []
+for line in first_two_lines:
+    print(line, end="")
 
-    def add_employee(self, employee):
-        self.employees.append(employee)
-
-    def display_employees(self):
-        if not self.employees:
-            print("No employee records available.")
-        else:
-            print("\n--- Employee Records ---")
-            for employee in self.employees:
-                employee.display()
-                print()
-
-
-# Main Program
-company = Company()
-
-n = int(input("Enter number of employees: "))
-
-for i in range(n):
-    print(f"\nEnter details of Employee {i + 1}")
-    name = input("Enter employee name: ")
-    emp_id = input("Enter employee ID: ")
-    salary = float(input("Enter basic salary: "))
-
-    employee = Employee(name, emp_id, salary)
-    company.add_employee(employee)
-
-company.display_employees()
-
-
-# Fibonacci using Memoization (Top-Down Dynamic Programming)
-
-memo = {}
-
-def fibonacci(n):
-    if n in memo:
-        return memo[n]
-
-    if n <= 1:
-        return n
-
-    memo[n] = fibonacci(n - 1) + fibonacci(n - 2)
-    return memo[n]
-
-
-N = int(input("Enter number of Fibonacci terms: "))
-
-print("First", N, "Fibonacci numbers:")
-for i in range(N):
-    print(fibonacci(i), end=" ")
+print("\n\nExtracted lines have been written to output.txt")
